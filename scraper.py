@@ -65,9 +65,9 @@ class Scraper:
         print "\rFinished, Filesize: " + self._nice_size(sizeDownloaded) + " Filename: " + filename
 
 
-	def download_file_via_wget(self, url, saveLocation):		
-		res = subprocess.call("wget -O '" + saveLocation + "' url " + self.wget_vars, shell=True)
-		return res
-	
-		if __name__ == "__main__":
+    def download_file_via_wget(self, url, saveLocation):		
+        res = subprocess.call("wget -O '" + saveLocation + "' url " + self.wget_vars, shell=True)
+        return res
+
+        if __name__ == "__main__":
     print s._nice_size(234232475)
