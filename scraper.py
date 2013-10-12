@@ -9,8 +9,8 @@ class Scraper:
         #create the build opener
         self.opener = urllib2.build_opener()
         self.headers = {"User-Agent" : "Mozilla/5.0 (X11; U; Linux i686; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Safari/531.2+ Epiphany/2.29.5", "Accept" : "text/html, application/xml;q=0.9    , application/xhtml xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=    0.1"}
-		
-		self.wget_vars = "-c -e robots=off --user-agent '" + self.headers['User-Agent'] + "'"
+
+        self.wget_vars = "-c -e robots=off --user-agent '" + self.headers['User-Agent'] + "'"
 
         self.opener.addheaders.append(('User-Agent', self.headers['User-Agent']))
         self.opener.addheaders.append(("Accept", self.headers['Accept']))
@@ -69,5 +69,5 @@ class Scraper:
         res = subprocess.call("wget -O '" + saveLocation + "' url " + self.wget_vars, shell=True)
         return res
 
-        if __name__ == "__main__":
+if __name__ == "__main__":
     print s._nice_size(234232475)
