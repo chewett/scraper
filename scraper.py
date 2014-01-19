@@ -2,6 +2,7 @@
 import urllib2
 import json
 import sys
+import subprocess
 
 class Scraper:
 
@@ -66,7 +67,7 @@ class Scraper:
 
 
     def download_file_via_wget(self, url, saveLocation):		
-        res = subprocess.call("wget -O '" + saveLocation + "' url " + self.wget_vars, shell=True)
+        res = subprocess.call("wget -O '" + saveLocation + "' '" + url + "' " + self.wget_vars, shell=True)
         return res
 
 if __name__ == "__main__":
