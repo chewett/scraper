@@ -15,6 +15,7 @@ class Scraper:
 
         self.opener.addheaders.append(('User-Agent', self.headers['User-Agent']))
         self.opener.addheaders.append(("Accept", self.headers['Accept']))
+        self.cookie = cookie
         if cookie is not None:
             self.opener.addheaders.append(('Cookie', cookie))
 
