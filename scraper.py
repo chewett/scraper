@@ -6,10 +6,12 @@ import subprocess
 
 class Scraper:
 
+    USER_AGENT = "Mozilla/5.0 (X11; U; Linux i686; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Safari/531.2+ Epiphany/2.29.5"
+
     def __init__(self, cookie=None):
         #create the build opener
         self.opener = urllib2.build_opener()
-        self.headers = {"User-Agent" : "Mozilla/5.0 (X11; U; Linux i686; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Safari/531.2+ Epiphany/2.29.5", "Accept" : "text/html, application/xml;q=0.9    , application/xhtml xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=    0.1"}
+        self.headers = {"User-Agent" : Scraper.USER_AGENT, "Accept" : "text/html, application/xml;q=0.9    , application/xhtml xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=    0.1"}
 
         self.wget_vars = "-c -e robots=off --user-agent '" + self.headers['User-Agent'] + "'"
 
