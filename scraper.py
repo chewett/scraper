@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import urllib2
+import urllib
 import json
 import sys
 import subprocess
@@ -26,7 +27,8 @@ class Scraper:
         return self.opener.open(request)
 
     def post(self, url, data):
-        request = urllib2.Request(url, data, self.headers)
+        encoded_data = urllib.urlencode(data)
+        request = urllib2.Request(url, encoded_data, self.headers)
         return self.opener.open(request)
 
     def _nice_size(self, size):
