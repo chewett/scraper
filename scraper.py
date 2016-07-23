@@ -70,9 +70,12 @@ class Scraper:
 
         print "\rFinished, Filesize: " + self._nice_size(sizeDownloaded) + " Filename: " + filename
 
+    def get_wget_command(self, url, saveLocation):
+        return "wget -O '" + saveLocation + "' '" + url + "' " + self.wget_vars
 
-    def download_file_via_wget(self, url, saveLocation):		
-        res = subprocess.call("wget -O '" + saveLocation + "' '" + url + "' " + self.wget_vars, shell=True)
+    def download_file_via_wget(self, url, saveLocation):
+        command  = self.get_wget_command(url, saveLocation)
+        res = subprocess.call(command, shell=True)
         return res
 
 if __name__ == "__main__":
