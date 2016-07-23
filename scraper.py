@@ -76,4 +76,6 @@ class Scraper:
         return res
 
 if __name__ == "__main__":
+    s = Scraper()
+
     print s._nice_size(234232475)
