@@ -31,6 +31,22 @@ class Scraper:
         request = urllib2.Request(url, encoded_data, self.headers)
         return self.opener.open(request)
 
+    def head(self, url):
+        request = urllib2.Request(url, None, self.headers)
+        request.get_method = lambda: 'HEAD'
+        return self.opener.open(request)
+
+    def url_exists(self, url):
+        try:
+            response = self.head(url)
+            return True
+        except urllib2.HTTPError as e:
+            if e.code == 404:
+                return False
+            else:
+                raise
+
+
     def _nice_size(self, size):
         for sizeUnit in ['bytes', 'KB', 'MB', 'GB', 'TB']:
             if size < 1024.0:
