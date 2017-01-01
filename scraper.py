@@ -87,7 +87,7 @@ class Scraper:
         print "\rFinished, Filesize: " + self._nice_size(sizeDownloaded) + " Filename: " + filename
 
     def get_wget_command(self, url, saveLocation):
-        safe_url = url.replace("\"", "\\\"")
+        safe_url = url.replace("\"", "\\\"").replace('`', r'\`')
         command = "wget -O '" + saveLocation + "' \"" + safe_url + "\" " + self.wget_vars
         return command
 
