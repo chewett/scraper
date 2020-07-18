@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-import urllib2
-import urllib
+
+import urllib.request
+import urllib.parse
+import urllib.error
 import json
 import sys
 import subprocess
@@ -11,7 +13,7 @@ class Scraper:
 
     def __init__(self, cookie=None):
         #create the build opener
-        self.opener = urllib2.build_opener()
+        self.opener = urllib.request.build_opener()
         self.headers = {"User-Agent" : Scraper.USER_AGENT, "Accept" : "text/html, application/xml;q=0.9    , application/xhtml xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=    0.1"}
 
         self.wget_vars = "-c -e robots=off --user-agent '" + self.headers['User-Agent'] + "'"
@@ -23,16 +25,16 @@ class Scraper:
             self.opener.addheaders.append(('Cookie', cookie))
 
     def get(self, url):
-        request = urllib2.Request(url, None, self.headers)
+        request = urllib.request.Request(url, None, self.headers)
         return self.opener.open(request)
 
     def post(self, url, data):
-        encoded_data = urllib.urlencode(data)
-        request = urllib2.Request(url, encoded_data, self.headers)
+        encoded_data = urllib.parse.urlencode(data)
+        request = urllib.request.Request(url, encoded_data, self.headers)
         return self.opener.open(request)
 
     def head(self, url):
-        request = urllib2.Request(url, None, self.headers)
+        request = urllib.request.Request(url, None, self.headers)
         request.get_method = lambda: 'HEAD'
         return self.opener.open(request)
 
@@ -40,7 +42,7 @@ class Scraper:
         try:
             response = self.head(url)
             return True
-        except urllib2.HTTPError as e:
+        except urllib.error.HTTPError as e:
             if e.code == 404:
                 return False
             else:
@@ -84,7 +86,7 @@ class Scraper:
             sys.stdout.write("\rDown: "+self._nice_size(sizeDownloaded)+" of "+self._nice_size(filesize)+" "+ str(((float(sizeDownloaded) / filesize) * 100)) + "%")
             sys.stdout.flush()
 
-        print "\rFinished, Filesize: " + self._nice_size(sizeDownloaded) + " Filename: " + filename
+        print("\rFinished, Filesize: " + self._nice_size(sizeDownloaded) + " Filename: " + filename)
 
     def get_wget_command(self, url, saveLocation):
         safe_url = url.replace("\"", "\\\"").replace('`', r'\`')
@@ -99,4 +101,4 @@ class Scraper:
 if __name__ == "__main__":
     s = Scraper()
 
-    print s._nice_size(234232475)
+    print(s._nice_size(234232475))
