@@ -14,7 +14,7 @@ class Scraper:
     def __init__(self, cookie=None):
         #create the build opener
         self.opener = urllib.request.build_opener()
-        self.headers = {"User-Agent" : Scraper.USER_AGENT, "Accept" : "text/html, application/xml;q=0.9    , application/xhtml xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=    0.1"}
+        self.headers = {"User-Agent" : Scraper.USER_AGENT, "Accept" : "*/*"}
 
         self.wget_vars = "-c -e robots=off --user-agent '" + self.headers['User-Agent'] + "'"
 
@@ -30,7 +30,7 @@ class Scraper:
 
     def post(self, url, data):
         encoded_data = urllib.parse.urlencode(data)
-        request = urllib.request.Request(url, encoded_data, self.headers)
+        request = urllib.request.Request(url, str.encode(encoded_data), self.headers)
         return self.opener.open(request)
 
     def head(self, url):
